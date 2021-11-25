@@ -1,5 +1,6 @@
 package hu.petrik.palinkaapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,5 +44,14 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query(TABLE_NAME, new String[]{COL_ID,COL_FOZO,COL_GYUMOLCS,COL_ALKOHOL},
                 null,null,null,null,null);
+    }
+
+    public boolean rogzites(String fozo, String gyumolcs, int alkohol){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_FOZO, fozo);
+        values.put(COL_GYUMOLCS, gyumolcs);
+        values.put(COL_ALKOHOL, alkohol);
+        return db.insert(TABLE_NAME, null, values) != -1;
     }
 }
