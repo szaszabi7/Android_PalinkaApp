@@ -54,4 +54,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_ALKOHOL, alkohol);
         return db.insert(TABLE_NAME, null, values) != -1;
     }
+
+    /*public Cursor keres(String fozo, String gyumolcs) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME + " WHERE "+COL_FOZO
+                +" = ? AND "+COL_GYUMOLCS+ " = ?", new String[]{fozo.toString(), gyumolcs.toString()});
+
+    }*/
 }
