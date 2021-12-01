@@ -23,17 +23,31 @@ public class AdatKeresesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adat_kereses);
         init();
 
-        /*btnKereses.setOnClickListener(new View.OnClickListener() {
+        btnKereses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String fozo = editFozo.getText().toString().trim();
                 String gyumolcs = editGyumolcs.getText().toString().trim();
-                Cursor adatok = adatbazis.keres(fozo, gyumolcs);
+                Cursor adat = adatbazis.keres(fozo, gyumolcs);
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Alkoholtartalom").append(adatok.getInt(0)).append(" %");
-                textPalinka.setText(stringBuilder.toString());
+
+                if (fozo.isEmpty() || gyumolcs.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Minden mező kitöltése kötelező", Toast.LENGTH_SHORT).show();
+                    textPalinka.setText("");
+                } else {
+                    if (adat.getCount() == 0) {
+                        Toast.makeText(getApplicationContext(), "Nincs ilyen pálinka!", Toast.LENGTH_SHORT).show();
+                        textPalinka.setText("");
+                    } else {
+                        while (adat.moveToNext()) {
+                            stringBuilder.append("Alkoholtartalom: ").append(adat.getInt(0)).append("%");
+                            Toast.makeText(getApplicationContext(), "Sikeres keresés!", Toast.LENGTH_SHORT).show();
+                        }
+                        textPalinka.setText(stringBuilder.toString());
+                    }
+                }
             }
-        });*/
+        });
 
         btnVissza.setOnClickListener(new View.OnClickListener() {
             @Override
